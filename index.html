@@ -3,41 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>席替え案 作成ツール</title>
+    <title>Seat Shuffler - 席替え案 自動生成</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <header class="app-header">
-            <div class="logo">
-                <h1>席替え Shuffler</h1>
-            </div>
-            <nav class="main-nav">
-                <button data-view="input" class="nav-btn active">児童登録</button>
-                <button data-view="layout" class="nav-btn">座席配置</button>
-                <button data-view="conditions" class="nav-btn">条件設定</button>
-                <button data-view="result" class="nav-btn">結果確認</button>
-                <button data-view="history" class="nav-btn">履歴管理</button>
-                <button data-view="student" class="nav-btn special">発表モード</button>
-            </nav>
-        </header>
-
-        <main id="view-container" class="view-container">
-            <!-- Views will be injected here -->
-            <div id="loading">読み込み中...</div>
-        </main>
-
-        <footer class="app-footer">
-            <p>席替え案 作成ツール v0.1.1</p>
-        </footer>
+    <div class="app-background">
+        <div class="circle c1"></div>
+        <div class="circle c2"></div>
     </div>
 
-    <!-- Scripts (Non-module for file:// compatibility) -->
-    <script>window.Views = {};</script>
+    <div class="app-container">
+        <header>
+            <div class="header-title">
+                <img src="images/banner_transparent.png" alt="Seat Shuffler スマートな条件付き席替えツール" class="title-banner">
+            </div>
+            <div class="header-actions">
+                <button id="header-data-btn" class="header-btn" title="データ管理">
+                    <span class="icon"></span> データ管理保存
+                </button>
+                <button id="header-history-btn" class="header-btn" title="過去の履歴">
+                    <span class="icon"></span> 席替え履歴
+                </button>
+            </div>
+        </header>
+
+        <nav class="main-nav">
+            <button class="nav-btn active" data-view="input">
+                <span class="step-num">1</span> 児童登録
+            </button>
+            <button class="nav-btn" data-view="layout">
+                <span class="step-num">2</span> 座席配置
+            </button>
+            <button class="nav-btn" data-view="conditions">
+                <span class="step-num">3</span> 条件設定
+            </button>
+            <button class="nav-btn" data-view="result">
+                <span class="step-num">4</span> 結果確認
+            </button>
+        </nav>
+
+        <main id="view-container">
+            <!-- View content injected here -->
+        </main>
+    </div>
+
+    <!-- Data Management Modal -->
+    <div id="data-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3> データ管理保存</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="data-actions">
+                    <p class="data-summary">
+                        現在の設定をファイルに保存したり、読み込んだりできます。
+                    </p>
+                    <div class="action-row" style="margin-top: 1rem;">
+                        <button id="modal-export-btn" class="btn-primary" style="width:100%"> 現在の設定をファイルに保存 (エクスポート)</button>
+                    </div>
+                    <div class="action-row" style="margin-top: 1rem;">
+                        <input type="file" id="modal-import-input" style="display:none" accept=".json">
+                        <button id="modal-import-btn" class="btn-secondary" style="width:100%"> 設定ファイルを読み込む (インポート)</button>
+                    </div>
+                    
+                    <div id="modal-export-preview" class="export-preview hidden">
+                        <h4>エクスポートデータ</h4>
+                        <p class="hint">下のテキストをコピーしてテキストファイルに保存してください（拡張子は .json）</p>
+                        <textarea id="modal-export-textarea" readonly></textarea>
+                        <button id="modal-copy-btn" class="btn-secondary"> コピー</button>
+                    </div>
+
+                    <div class="danger-zone" style="margin-top: 2rem;">
+                        <h3> データのリセット</h3>
+                        <button id="modal-reset-btn" class="btn-delete" style="width:100%">すべてのデータを削除して初期化</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div id="history-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3> 席替え履歴</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-history-list"></div>
+            </div>
+        </div>
+    </div>
+
     <script src="store.js"></script>
     <script src="shuffler.js"></script>
     <script src="views/input-view.js"></script>
@@ -45,7 +104,9 @@
     <script src="views/condition-view.js"></script>
     <script src="views/result-view.js"></script>
     <script src="views/student-view.js"></script>
-    <script src="views/history-view.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
+
+
+

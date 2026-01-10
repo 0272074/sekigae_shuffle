@@ -32,7 +32,7 @@
                         <div id="seats-grid" class="seats-grid" style="grid-template-columns: repeat(${this.layout.cols}, 1fr);">${this.renderSeats()}</div>
                     </div>
                 </div>
-                <div class="view-footer"><button id="save-layout-btn" class="btn-save">保存して次へ</button></div>
+                
             </div>`;
         this.attachEvents();
         return this.container;
@@ -108,3 +108,4 @@
     }
 }
 window.Views['layout'] = LayoutView;
+

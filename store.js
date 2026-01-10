@@ -1,4 +1,7 @@
-﻿class Store {
+﻿// Initialize global Views container
+window.Views = {};
+
+class Store {
     constructor() {
         this.state = this.load() || {
             students: [],

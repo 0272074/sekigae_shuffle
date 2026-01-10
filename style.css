@@ -20,19 +20,9 @@
     padding: 0;
 }
 
-body {
-    font-family: 'Inter', 'Noto Sans JP', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    height: 100vh;
-    overflow: hidden;
-}
+body { font-family: 'Inter', 'Noto Sans JP', sans-serif; background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; overflow-y: auto; }
 
-#app {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+.app-container { display: flex; flex-direction: column; min-height: 100vh; padding-bottom: 2rem; }
 
 /* Header */
 .app-header {
@@ -1098,4 +1088,559 @@ body {
     background: #fef3c7;
     padding: 0.5rem;
     border-radius: 6px;
+}
+
+/* Step Wizard Navigation */
+.main-nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+    gap: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.nav-btn {
+    position: relative;
+    background: #e2e8f0;
+    color: #64748b;
+    padding: 0.8rem 2rem 0.8rem 2.5rem;
+    font-weight: 700;
+    clip-path: polygon(95% 0, 100% 50%, 95% 100%, 0% 100%, 5% 50%, 0% 0%);
+    margin-right: -1rem;
+    z-index: 1;
+    transition: all 0.3s;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.nav-btn:first-child {
+    clip-path: polygon(95% 0, 100% 50%, 95% 100%, 0% 100%, 0% 0%);
+    padding-left: 1.5rem;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.nav-btn:last-child {
+    clip-path: polygon(100% 0, 100% 100%, 0% 100%, 5% 50%, 0% 0%);
+    padding-right: 1.5rem;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    margin-right: 0;
+}
+
+.nav-btn.active {
+    background: var(--accent);
+    color: white;
+    z-index: 10;
+    transform: scale(1.05); /* Slightly larger */
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.nav-btn:hover:not(.active) {
+    background: #cbd5e1;
+    z-index: 5;
+}
+
+.step-num {
+    background: rgba(255,255,255,0.2);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.nav-btn.active .step-num {
+    background: white;
+    color: var(--accent);
+}
+
+/* Header Action Buttons */
+.header-actions {
+    position: absolute;
+    right: 2rem;
+    top: 1rem;
+    display: flex;
+    gap: 0.75rem;
+}
+
+.header-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    background: rgba(255,255,255,0.7);
+    color: #475569;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.header-btn:hover {
+    background: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    color: var(--accent);
+}
+
+.header-btn i, .header-btn span.icon {
+    font-size: 1rem;
+}
+
+/* Modal for Import/Export/History */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 16px;
+    padding: 0;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #1e293b;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #94a3b8;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    color: #64748b;
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+/* Adjust main header title */
+header h1 {
+    margin-left: 0;
+}
+
+/* Teacher View Transform */
+.teacher-view {
+    transform: rotate(180deg);
+}
+
+.teacher-view .seat-cell {
+    transform: rotate(-180deg);
+}
+
+/* View Mode Switch Toggle */
+.view-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.toggle-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #94a3b8;
+    transition: color 0.3s;
+}
+
+.toggle-label.active {
+    color: var(--accent);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* Import/Export Section */
+.import-export-section {
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.import-export-section h3 {
+    margin-bottom: 0.5rem;
+    color: #0369a1;
+}
+
+/* Student View */
+.student-ui {
+    background: white;
+    min-height: 80vh;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.btn-reveal {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    font-size: 2rem;
+    padding: 1rem 3rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 800;
+    box-shadow: 0 10px 20px rgba(245, 158, 11, 0.4);
+    transition: transform 0.2s;
+    display: block;
+    margin: 2rem auto;
+}
+
+.btn-reveal:hover {
+    transform: scale(1.05);
+}
+
+.btn-reveal:active {
+    transform: scale(0.95);
+}
+
+.student-cell {
+    background: #e2e8f0;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.student-cell.revealed {
+    background: white;
+    border: 2px solid var(--accent);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.student-cell .student-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+
+/* Enhanced Student Card Visibility */
+.student-card-floating {
+    font-size: 1.5rem !important; /* Larger text */
+    font-family: 'Zen Maru Gothic', sans-serif;
+    color: #2d3748;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    line-height: 1.2;
+}
+
+/* Group Divider Lines */
+.seat-cell.group-border-top { border-top: 3px solid #4a5568 !important; }
+.seat-cell.group-border-bottom { border-bottom: 3px solid #4a5568 !important; }
+.seat-cell.group-border-left { border-left: 3px solid #4a5568 !important; }
+.seat-cell.group-border-right { border-right: 3px solid #4a5568 !important; }
+
+/* Group Overlay/Background Style (Alternative) */
+.group-overlay {
+    position: absolute;
+    border: 2px dashed rgba(0,0,0,0.2);
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Toggle Switch Extension */
+.view-toggle-area {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+/* Group Colors */
+.group-color-1 { border-color: #ef4444 !important; }
+.group-color-1 .group-badge { background: #ef4444; color: white; }
+
+.group-color-2 { border-color: #3b82f6 !important; }
+.group-color-2 .group-badge { background: #3b82f6; color: white; }
+
+.group-color-3 { border-color: #10b981 !important; }
+.group-color-3 .group-badge { background: #10b981; color: white; }
+
+.group-color-4 { border-color: #f59e0b !important; }
+.group-color-4 .group-badge { background: #f59e0b; color: white; }
+
+.group-color-5 { border-color: #8b5cf6 !important; }
+.group-color-5 .group-badge { background: #8b5cf6; color: white; }
+
+.group-color-6 { border-color: #ec4899 !important; }
+.group-color-6 .group-badge { background: #ec4899; color: white; }
+
+.group-color-7 { border-color: #6366f1 !important; }
+.group-color-7 .group-badge { background: #6366f1; color: white; }
+
+.group-color-8 { border-color: #14b8a6 !important; }
+.group-color-8 .group-badge { background: #14b8a6; color: white; }
+
+/* Fallback for >8 groups, cycle colors in JS or CSS nth-child if possible, but specific classes are safer */
+
+.group-badge {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Presentation Mode (Full Screen) */
+body.presentation-mode header,
+body.presentation-mode .main-nav,
+body.presentation-mode .app-footer, 
+body.presentation-mode #presentation-btn { /* Hide the trigger button itself if visible */
+    display: none !important;
+}
+
+body.presentation-mode .app-container {
+    padding-top: 1rem;
+    background: #f0fdf4; /* Slightly different bg for presentation */
+}
+
+/* Thicker borders for group visualization */
+.seat-cell.with-group-style {
+    border-width: 3px !important;
+}
+
+/* Banner Style */
+.title-banner {
+    max-width: 100%;
+    height: auto;
+    max-height: 120px; /* Limit height */
+    object-fit: contain;
+    display: block;
+}
+/* Refined Header Layout */
+header {
+    position: relative;
+    background: #f8fafc; /* Very light slate, likely matches/blends with banner */
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: center; /* Center content */
+    align-items: center;
+    min-height: 160px; /* Ensure space for banner */
+}
+
+.header-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-banner {
+    max-width: 100%;
+    height: auto;
+    max-height: 140px;
+    object-fit: contain;
+    /* Blend mode magic to remove white/light background box */
+    mix-blend-mode: multiply; 
+    filter: contrast(1.05); /* Slight pop */
+}
+
+.header-actions {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
+/* Adjust button transparency to not clash if they overlap slightly */
+.header-btn {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.header-btn:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Clean up nav to sit nicely below */
+.main-nav {
+    margin-top: 1rem;
+    justify-content: center;
+}
+/* Updated Header Background Match */
+header {
+    /* Updated background color to match typical banner bg (adjust if needed) */
+    background: #ecf3f6; 
+    border-bottom: none; /* Remove border for seamless look */
+    /* Remove mix-blend if we are matching colors directly for cleaner text */
+}
+
+.title-banner {
+    mix-blend-mode: normal; /* Reset blending */
+    filter: none;
+    /* Optional: Apply a feathered mask at edges if color isn't 100% match? 
+       No, CSS masking is complex. Let's rely on color match. */
+}
+
+/* Make the app container top blend with header */
+.app-container {
+    background: #ecf3f6; /* Continue the color down a bit? Or keep app white */
+    /* Actually app container wraps header, so header bg is enough if header spans full width */
+}
+
+/* Let's make the main nav connect smoothly */
+.main-nav {
+    background: #ecf3f6;
+    padding-bottom: 1rem;
+    border-radius: 0 0 20px 20px; /* Rounded bottom for the header area */
+    margin-top: 0;
+}
+
+/* Reset main content bg to white/off-white */
+#view-container {
+    background: transparent;
+    padding-top: 1rem;
+}
+/* Reverting to Multiply Blend Strategy */
+header {
+    background: transparent; /* Or keep it very light gray */
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.title-banner {
+    mix-blend-mode: multiply; /* Make white pixels transparent */
+    filter: contrast(1.05);
+}
+
+.main-nav {
+    background: transparent;
+    border-radius: 0;
+    margin-top: 1rem;
+}
+
+/* Ensure body bg is suitable for multiply (usually light/white) */
+.app-container {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* Example nice bg */
+    /* Or stick to simple color */
+    background: #f0f4f8; 
+}
+/* Final Banner Cleanup */
+header {
+    background: #ffffff;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.title-banner {
+    mix-blend-mode: normal; /* No blending needed for transparent png */
+    filter: none;
+    max-height: 130px; /* Optimal height */
+}
+
+/* Ensure app container matches or complements */
+.app-container {
+    background: #f8fafc; /* Slight contrast with white header */
+}
+
+.main-nav {
+    background: #ffffff; /* Extend header white down to nav */
+    border-bottom: 1px solid #e2e8f0;
+    margin-top: 0;
+    padding-bottom: 0.5rem;
+    border-radius: 0;
 }

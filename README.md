@@ -80,3 +80,4 @@ Issue、Pull Requestは歓迎します！
 ---
 
 Made with  for teachers
+
