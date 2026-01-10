@@ -9,15 +9,14 @@ class Store {
             constraints: [],
             history: [],
             currentSeating: null,
-            badges: ['A', 'B', 'C']  // Default badge types
+            badges: []  // Start with empty badges
         };
         this.listeners = [];
         if (this.state.layout.seats.length === 0) {
             this.initLayout(6, 6);
         }
-        // Ensure badges array exists
         if (!this.state.badges) {
-            this.state.badges = ['A', 'B', 'C'];
+            this.state.badges = [];
         }
     }
     initLayout(rows, cols) {
@@ -26,7 +25,8 @@ class Store {
         const seats = [];
         for (let r = 0; r < rows; r++) {
             for (let c = 0; c < cols; c++) {
-                seats.push({ id: `${r}-${c}`, row: r, col: c, type: 'normal', groupId: Math.floor(c / 2) + 1 });
+                // Default grouping is neutral
+                seats.push({ id: `${r}-${c}`, row: r, col: c, type: 'normal', groupId: 0 });
             }
         }
         this.state.layout.seats = seats;
@@ -59,5 +59,11 @@ class Store {
         this.save();
     }
     setBadges(badges) { this.state.badges = badges; this.save(); }
+    
+    // Manual Reset method (useful for debugging/clearing)
+    clearAllData() {
+        localStorage.removeItem('seat-shuffler-data');
+        location.reload();
+    }
 }
 window.store = new Store();
