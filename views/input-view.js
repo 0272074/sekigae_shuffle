@@ -107,12 +107,7 @@
             this.students.push({ id: this.students.length + 1, name: '', gender: '', badges: [] });
             this.saveAndRefresh();
         };
-        this.container.querySelector('#save-students-btn').onclick = () => {
-            this.updateLocalData();
-            window.store.setStudents(this.students);
-            window.store.setBadges(this.badges);
-            window.app.switchView('layout');
-        };
+        
         this.container.querySelector('#add-badge-btn').onclick = () => {
             const name = prompt('新しいバッジの名前（1〜3文字推奨）:');
             if (name && name.trim()) {
@@ -206,4 +201,5 @@
     }
 }
 window.Views['input'] = InputView;
+
 

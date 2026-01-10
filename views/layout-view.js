@@ -77,10 +77,7 @@
         this.container.querySelector('#apply-grid-btn').onclick = () => {
             this.reinitGrid(parseInt(this.container.querySelector('#rows-input').value), parseInt(this.container.querySelector('#cols-input').value));
         };
-        this.container.querySelector('#save-layout-btn').onclick = () => {
-            window.store.updateLayout(this.layout);
-            window.app.switchView('conditions');
-        };
+        
     }
     cycleSeatType(index) {
         const types = ['normal', 'forbidden', 'boys', 'girls'];
@@ -108,4 +105,5 @@
     }
 }
 window.Views['layout'] = LayoutView;
+
 
