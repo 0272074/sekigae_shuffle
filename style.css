@@ -1722,3 +1722,137 @@ header {
         width: 100%;
     }
 }
+
+/* --- Responsive Optimization --- */
+
+/* Mobile Header Adjustments */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        min-height: auto;
+        padding: 1rem 0.5rem;
+    }
+
+    .header-actions {
+        position: static;
+        width: 100%;
+        justify-content: center;
+        margin-top: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .header-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    .title-banner {
+        max-height: 80px;
+    }
+}
+
+/* Step Wizard Mobile */
+@media (max-width: 600px) {
+    .main-nav {
+        gap: 0.2rem;
+        padding: 0 0.5rem;
+    }
+
+    .nav-btn {
+        padding: 0.6rem 0.5rem;
+        clip-path: none;
+        border-radius: 6px;
+        margin-right: 0;
+        font-size: 0.7rem;
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .nav-btn:first-child, .nav-btn:last-child {
+        clip-path: none;
+        border-radius: 6px;
+    }
+
+    .step-num {
+        display: none; /* Hide numbers on very small screens to save space */
+    }
+}
+
+/* Responsive Grid Adjustments */
+@media (max-width: 768px) {
+    .grid-wrapper {
+        padding: 1rem 0.5rem;
+    }
+
+    .seats-grid {
+        gap: 6px;
+    }
+
+    .seat-cell {
+        width: 15vw;
+        height: 15vw;
+        min-width: 50px;
+        min-height: 50px;
+        max-width: 80px;
+        max-height: 80px;
+        padding: 4px;
+    }
+
+    .student-name {
+        font-size: 0.75rem;
+    }
+
+    .seat-coord {
+        font-size: 0.55rem;
+    }
+
+    .seat-type-label {
+        font-size: 0.6rem;
+        padding: 1px 2px;
+    }
+
+    .group-badge {
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
+        top: -4px;
+        left: -4px;
+    }
+}
+
+/* Table and Form Adjustments */
+@media (max-width: 600px) {
+    .glass-panel {
+        padding: 1rem;
+    }
+
+    .view-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .action-bar {
+        flex-direction: column;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .student-table th, .student-table td {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Presentation Mode Mobile */
+@media (max-width: 768px) {
+    body.presentation-mode .app-container {
+        padding: 0.5rem;
+    }
+
+    .student-card-floating {
+        font-size: 1rem !important;
+    }
+}
