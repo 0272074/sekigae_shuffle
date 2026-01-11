@@ -72,6 +72,11 @@ class App {
     }
 
     initModals() {
+        // Usage button
+        const usageBtn = document.getElementById('usage-btn');
+        if (usageBtn) {
+            usageBtn.onclick = () => this.switchView('usage');
+        }
         // Data Modal
         const dataModal = document.getElementById('data-modal');
         document.getElementById('header-data-btn').onclick = () => {
@@ -204,4 +209,7 @@ class App {
 document.addEventListener('DOMContentLoaded', () => {
     window.app = new App();
 });
+
+
+
 

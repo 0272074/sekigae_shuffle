@@ -1644,3 +1644,81 @@ header {
     padding-bottom: 0.5rem;
     border-radius: 0;
 }
+
+/* Usage Page Styles */
+.usage-view-container {
+    padding: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.usage-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.usage-step-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem !important;
+    position: relative;
+    overflow: hidden;
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.step-badge {
+    background: var(--primary);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.step-text {
+    flex: 1;
+}
+
+.step-text h3 {
+    margin-top: 0;
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+}
+
+.usage-img-wrapper {
+    flex-shrink: 0;
+    width: 400px;
+}
+
+.usage-img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
+}
+
+@media (max-width: 850px) {
+    .usage-step-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .usage-img-wrapper {
+        width: 100%;
+    }
+}
