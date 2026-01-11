@@ -67,8 +67,14 @@
                         <button id="modal-export-btn" class="btn-primary" style="width:100%"> 現在の設定をファイルに保存 (エクスポート)</button>
                     </div>
                     <div class="action-row" style="margin-top: 1rem;">
-                        <input type="file" id="modal-import-input" style="display:none" accept=".json">
+                                                <input type="file" id="modal-import-input" style="display:none" accept=".json">
                         <button id="modal-import-btn" class="btn-secondary" style="width:100%"> 設定ファイルを読み込む (インポート)</button>
+                        
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #cbd5e0;">
+                            <p class="hint">ファイル選択が動作しない場合（Googleサイト等）は、下の枠にデータを貼り付けてください：</p>
+                            <textarea id="modal-import-textarea" placeholder='{"students": [...], "layout": ...}' style="width:100%; height:80px; font-family:monospace; font-size:0.75rem; margin-top:0.5rem; padding:0.5rem; border:1px solid #e2e8f0; border-radius:4px;"></textarea>
+                            <button id="modal-import-text-btn" class="btn-secondary" style="width:100%; margin-top:0.5rem; font-size:0.85rem;">貼り付けたテキストから読み込む</button>
+                        </div>
                     </div>
                     
                     <div id="modal-export-preview" class="export-preview hidden">
@@ -107,9 +113,12 @@
     <script src="views/condition-view.js"></script>
     <script src="views/result-view.js"></script>
     <script src="views/student-view.js"></script>
-    <script src="views/usage-view.js"></script>`n    <script src="app.js"></script>
+    <script src="views/usage-view.js"></script>
+    <script src='app.js'></script>
 </body>
 </html>
+
+
 
 
 
